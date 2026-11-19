@@ -184,6 +184,8 @@ body {
 
 }
 
+.product-img-desktop {display: none;}
+.product-img-tablet {display: none;}
 .product-card .product-img {
   width: 100%;
   border-radius: 8px;

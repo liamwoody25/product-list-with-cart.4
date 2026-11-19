@@ -5,6 +5,7 @@ const QuanBtn = document.querySelectorAll('.quantity-content')
 const cartContainer = document.querySelector('.cart-content')
 const cartImageHolder = document.querySelector('.cart-placeholder-content');
 const carbonImg = document.querySelector('.cart-cta')
+const imageCard = document.querySelectorAll('.product-img');
 
 let cart = []
 
@@ -103,6 +104,7 @@ for (let i = 0; i < itemBtn.length; i += 1) {
     productOutput.innerText = showQuantity
 
     QuanBtn[i].style.display = 'block'
+    imageCard[i].style.border = '3px solid #C73B0F'
     document.getElementById('cart-output').innerText = showQuantity
 
     const name = itemBtn[i].dataset.name
@@ -140,20 +142,7 @@ for (let i = 0; i < insertBtn.length; i+= 1) {
 
 for (let i = 0; i < deleteBtn.length; i+= 1) {
   deleteBtn[i].addEventListener('click', function(){
-      const productOutput = document.querySelectorAll('.quantity-output')[i];
-  let showQuantity = Number(productOutput.innerText) - 1;
 
-  if (showQuantity < 10) {
-    showQuantity < 0
-  }
-
-  productOutput.innerText = showQuantity
-
-  if (showQuantity === 0) {
-    QuanBtn[i].style.display = 'none'
-  }
-
-  document.getElementById('cart-output').innerText = showQuantity
     removeProductFromCart(i)
   })
 }
