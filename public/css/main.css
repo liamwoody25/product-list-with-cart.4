@@ -363,7 +363,7 @@ body {
 .product-card {
   width: 31%;
 }
-
+.product-img-desktop {display: none;}
 .product-img {display: none;}
 .product-img-tablet {
   width: 100%;
