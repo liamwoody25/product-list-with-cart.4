@@ -63,6 +63,24 @@ function addProduct() {
   updateCart()
 }
 
+function removeProductFromCart(i) {
+  const productOutput = document.querySelectorAll('.quantity-output')[i];
+  let showQuantity = Number(productOutput.innerText) - 1;
+
+  if (showQuantity < 10) {
+    showQuantity < 0
+  }
+
+  productOutput.innerText = showQuantity
+
+  if (showQuantity === 0) {
+    QuanBtn[i].style.display = 'none'
+    imageCard[i].style.border = 'none'
+  }
+
+  document.getElementById('cart-output').innerText = showQuantity
+}
+
 
 
 function updateCart() {
@@ -142,7 +160,6 @@ for (let i = 0; i < insertBtn.length; i+= 1) {
 
 for (let i = 0; i < deleteBtn.length; i+= 1) {
   deleteBtn[i].addEventListener('click', function(){
-
     removeProductFromCart(i)
   })
 }
