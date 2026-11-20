@@ -8,6 +8,8 @@ const carbonImg = document.querySelector('.cart-cta')
 const imageCard = document.querySelectorAll('.product-img');
 const imgCard = document.querySelectorAll('.product-img-tablet')
 const cardImage = document.querySelectorAll('.product-img-desktop')
+const comfirmBtn = document.querySelector('.confirm-order-btn');
+const modalContainer = document.querySelector('.confirmed-products-content');
 
 let cart = []
 
@@ -29,7 +31,6 @@ function sendProductToCart(name, price, category) {
     qty: 1
   }
   cart.push(product)
-  console.log(cart)
 
   
 }
@@ -61,10 +62,14 @@ function addProduct() {
   cartContainer.innerHTML = item
   cartImageHolder.style.display = 'none'
   
-
-  updateCart()
+  updateCart(item)
 }
 
+
+
+
+
+// this function removes a product from the cart
 function removeProductFromCart(i) {
   const productOutput = document.querySelectorAll('.quantity-output')[i];
   let showQuantity = Number(productOutput.innerText) - 1;
@@ -82,11 +87,15 @@ function removeProductFromCart(i) {
     cardImage[i].style.border = 'none'
   }
 
+  // this code removes the cart quantity output number from the cart
   document.getElementById('cart-output').innerText = showQuantity
+
+  
 }
 
 
 
+// this function adds the total price of the products thats being added
 function updateCart() {
   let totalPrice = 0
 
@@ -94,22 +103,22 @@ function updateCart() {
     totalPrice += cart[i].price * cart[i].qty
   }
 
+
   cartContainer.innerHTML += `
     <div class="cart-total-content">
       <h4>Order Total</h4>
       <h2>$${totalPrice.toFixed(2)}</h2>
     </div>
   `
- 
   
   carbonImg.style.display = 'flex'
-  console.log('this function works')
-  
+  comfirmBtn.style.display = 'block'
+
 }
 
 
 
-// this function removes a product from the cart
+
 
 
 
@@ -129,8 +138,13 @@ for (let i = 0; i < itemBtn.length; i += 1) {
     imageCard[i].style.border = '3px solid #C73B0F'
     imgCard[i].style.border = '3px solid #C73B0F'
     cardImage[i].style.border = '3px solid #C73B0F'
+
+
+    // this code adds the cart quantity output number to the cart once the quantity button is clicked
     document.getElementById('cart-output').innerText = showQuantity
 
+
+    // this code gets the data from the html data attribute
     const name = itemBtn[i].dataset.name
     const price = itemBtn[i].dataset.price
     const category = itemBtn[i].dataset.category
@@ -145,6 +159,8 @@ for (let i = 0; i < itemBtn.length; i += 1) {
 // this item button event listener listens for when the increase buttton is clicked
 for (let i = 0; i < insertBtn.length; i+= 1) {
   insertBtn[i].addEventListener('click', function(){
+
+    // this code adds the product quantity output number to the quantity button
     const productOutput = document.querySelectorAll('.quantity-output')[i]
     const showQuantity = Number(productOutput.innerText) + 1
 
@@ -153,8 +169,13 @@ for (let i = 0; i < insertBtn.length; i+= 1) {
     }
 
     productOutput.innerText = showQuantity
+    
+
+    // this code adds the cart quantity output number to the cart once the quantity button is clicked
     document.getElementById('cart-output').innerText = showQuantity
 
+
+    // this code gets the data from the html data attribute
     const name = itemBtn[i].dataset.name
     const price = itemBtn[i].dataset.price
     sendProductToCart(name, price)
@@ -169,3 +190,5 @@ for (let i = 0; i < deleteBtn.length; i+= 1) {
     removeProductFromCart(i)
   })
 }
+
+
